@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "533091983928",
+    "project_id": "ollert-task-management",
+    "storage_bucket": "ollert-task-management.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533091983928:android:ca121f40d609d1a50f7ccd",
+        "android_client_info": {
+          "package_name": "com.example.ollert_taskmanagementlitalkhotyakov"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533091983928-j14plbmhr5nnoaqujtvlip86q0276tfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuZ0tTd2oWM5Eq4iY1LE7noHa5qkCY7Lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533091983928-j14plbmhr5nnoaqujtvlip86q0276tfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
