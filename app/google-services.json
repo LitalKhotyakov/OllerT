@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "533091983928-pb7k2ua5g18372lophi00165anri51u1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ollert_taskmanagementlitalkhotyakov",
+            "certificate_hash": "c245a60d774fc83fd69f53dfab212b198bbca0e5"
+          }
+        },
+        {
           "client_id": "533091983928-j14plbmhr5nnoaqujtvlip86q0276tfm.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -1,7 +1,8 @@
-package com.example.ollert_taskmanagementlitalkhotyakov;
+package com.example.ollert_taskmanagementlitalkhotyakov.activities;
 
 import android.os.Bundle;
 
+import com.example.ollert_taskmanagementlitalkhotyakov.R;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
