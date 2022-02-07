@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.ollert_taskmanagementlitalkhotyakov.R;
+import com.example.ollert_taskmanagementlitalkhotyakov.fragments.CreateTaskFragment;
 import com.example.ollert_taskmanagementlitalkhotyakov.fragments.TasksListFragment;
 import com.example.ollert_taskmanagementlitalkhotyakov.fragments.callBacks.NavigatorCallBack;
 import com.example.ollert_taskmanagementlitalkhotyakov.objects.OllertTask;
@@ -31,13 +32,11 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
-                TasksListFragment.newInstance(navigatorCallBack)).commit();
+        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.TASK_LIST);
 
-        OllertTask ollertTask = new OllertTask("lital", "go home2", new Date());
-
+//        OllertTask ollertTask = new OllertTask("lital", "go home2", new Date());
 //        setTaskToFirestore(task);
-        getAllTasksFirebase();
+//        getAllTasksFirebase();
 
 
     }
@@ -60,31 +59,19 @@ public class MainActivity2 extends AppCompatActivity {
                 });
     }
 
-    private void setTaskToFirestore(OllertTask ollertTask) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection(COLLECTION_NAME).document(ollertTask.getTask_name())
-                .set(ollertTask)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
-    }
+
 
  private NavigatorCallBack navigatorCallBack = new NavigatorCallBack() {
      @Override
      public void navigateTo(ScreenName screenName) {
          switch (screenName){
              case TASK_LIST:
+                 getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
+                         TasksListFragment.newInstance(navigatorCallBack)).commit();
                  break;
              case CREATE_TASK:
+                 getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
+                         CreateTaskFragment.newInstance(navigatorCallBack)).commit();
                  break;
          }
      }

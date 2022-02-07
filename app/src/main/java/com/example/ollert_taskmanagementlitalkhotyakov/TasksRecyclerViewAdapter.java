@@ -3,8 +3,8 @@ package com.example.ollert_taskmanagementlitalkhotyakov;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.ollert_taskmanagementlitalkhotyakov.objects.OllertTask;
 import com.example.ollert_taskmanagementlitalkhotyakov.databinding.TaskItemBinding;
@@ -29,10 +29,8 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.myOllertTask = ollertTasks.get(position);
-        holder.taskTitleView.setText(ollertTasks.get(position).getTask_name()+"");
-        holder.taskContentView.setText(ollertTasks.get(position).getTask_content()+"");
-        holder.taskDate.setText(ollertTasks.get(position).getTask_date()+"");
+        holder.update(ollertTasks.get(position));
+
     }
 
     @Override
@@ -41,21 +39,23 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView taskTitleView;
-        public final TextView taskContentView;
-        public final TextView taskDate;
-        public OllertTask myOllertTask;
+
+        private TaskItemBinding binding;
 
         public ViewHolder(TaskItemBinding binding) {
             super(binding.getRoot());
-            taskTitleView = binding.taskName;
-            taskContentView = binding.taskContent;
-            taskDate = binding.taskDate;
+            this.binding = binding;
+
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + taskContentView.getText() + "'";
+        public void update(OllertTask myOllertTask) {
+            binding.taskName.setText(myOllertTask.getTask_name()+"");
+            binding.taskContent.setText(myOllertTask.getTask_content()+"");
+            binding.taskDate.setText(myOllertTask.getTask_date()+"");
+            if (!myOllertTask.getDone()){
+                binding.taskIsDone.setVisibility(View.INVISIBLE);
+            }
         }
+
     }
 }

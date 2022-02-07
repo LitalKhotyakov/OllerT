@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.ollert_taskmanagementlitalkhotyakov.TasksRecyclerViewAdapter;
 import com.example.ollert_taskmanagementlitalkhotyakov.R;
@@ -37,6 +38,7 @@ public class TasksListFragment extends Fragment {
 
     private List<OllertTask> ollertTasks;
     private NavigatorCallBack navigatorCallBack;
+    private RecyclerView recyclerView;
 
 
     /**
@@ -60,10 +62,9 @@ public class TasksListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ollertTasks = new ArrayList<>();
-        getAllTasksFirebase();
-        ollertTasks.add(new OllertTask("lital", "go home", new Date()));
-        ollertTasks.add(new OllertTask("dany", "go home2", new Date()));
-        ollertTasks.add(new OllertTask("vova", "go home3", new Date()));
+//        ollertTasks.add(new OllertTask("lital", "go home", new Date()));
+//        ollertTasks.add(new OllertTask("dany", "go home2", new Date()));
+//        ollertTasks.add(new OllertTask("vova", "go home3", new Date()));
 
     }
 
@@ -71,15 +72,19 @@ public class TasksListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tasks_item_list, container, false);
+        Button button = view.findViewById(R.id.add_task_button);
+        button.setOnClickListener(onClickListener);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new TasksRecyclerViewAdapter(ollertTasks));
-        }
+        recyclerView = view.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getAllTasksFirebase();
     }
 
     private void getAllTasksFirebase() {
@@ -92,11 +97,41 @@ public class TasksListFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
+                                Date date;
+                                boolean isDone;
+                                try {
+                                    date = new Date(document.getTimestamp("task_date").getSeconds()*1000);
+                                }catch (Exception e){
+                                    Log.e(TAG,e.getMessage());
+                                    date = new Date();
+                                }
+
+                                try {
+                                    isDone = document.getBoolean("done");
+                                }catch (Exception e){
+                                    Log.e(TAG,e.getMessage());
+                                    isDone = false;
+                                }
+
+
+                                OllertTask ollertTask = new OllertTask(document.getId(),
+                                        document.getString("task_content"),
+                                        date,
+                                        isDone );
+                                ollertTasks.add(ollertTask);
                             }
+                            recyclerView.setAdapter(new TasksRecyclerViewAdapter(ollertTasks));
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK);
+        }
+    };
 }

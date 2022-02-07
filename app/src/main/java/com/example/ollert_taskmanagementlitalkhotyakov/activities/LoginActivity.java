@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ollert_taskmanagementlitalkhotyakov.R;
-import com.example.ollert_taskmanagementlitalkhotyakov.objects.UserHelperClass;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
@@ -50,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("phoneNumber",phoneNumber);
                 startActivity(intent);
 
-
-                UserHelperClass helperClass = new UserHelperClass(FullName,UserName,Email,phoneNumber);
                 DocumentReference documentReference = fStore.collection("users").document(phoneNumber);
             }
 
