@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ollert_taskmanagementlitalkhotyakov.fragments.callBacks.NavigatorCallBack;
 import com.example.ollert_taskmanagementlitalkhotyakov.objects.OllertTask;
 import com.example.ollert_taskmanagementlitalkhotyakov.databinding.TaskItemBinding;
 
@@ -14,10 +15,12 @@ import java.util.List;
 
 public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecyclerViewAdapter.ViewHolder> {
 
-    private final List<OllertTask> ollertTasks;
+    private List<OllertTask> ollertTasks;
+    private final NavigatorCallBack navigatorCallBack;
 
-    public TasksRecyclerViewAdapter(List<OllertTask> items) {
+    public TasksRecyclerViewAdapter(List<OllertTask> items, NavigatorCallBack navigatorCallBack) {
         ollertTasks = items;
+        this.navigatorCallBack = navigatorCallBack;
     }
 
     @Override
@@ -38,6 +41,11 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
         return ollertTasks.size();
     }
 
+    public void updateList(List<OllertTask> ollertTasks){
+        this.ollertTasks = ollertTasks;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TaskItemBinding binding;
@@ -55,6 +63,14 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
             if (!myOllertTask.getDone()){
                 binding.taskIsDone.setVisibility(View.INVISIBLE);
             }
+            binding.itemLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (navigatorCallBack != null){
+                        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK,myOllertTask);
+                    }
+                }
+            });
         }
 
     }

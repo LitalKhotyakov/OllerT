@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.example.ollert_taskmanagementlitalkhotyakov.TasksRecyclerViewAdapter;
 import com.example.ollert_taskmanagementlitalkhotyakov.R;
@@ -29,16 +31,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * A fragment representing a list of Items.
  */
 public class TasksListFragment extends Fragment {
-    private  static final String TAG = "ItemFragment";
+    private static final String TAG = "ItemFragment";
 
     private List<OllertTask> ollertTasks;
     private NavigatorCallBack navigatorCallBack;
     private RecyclerView recyclerView;
+    private Switch isDoneSwitch;
+    private TasksRecyclerViewAdapter adapter;
 
 
     /**
@@ -78,6 +83,15 @@ public class TasksListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        isDoneSwitch = view.findViewById(R.id.is_done_filter);
+        isDoneSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                getAllTasksFirebase();
+            }
+        });
+
+
         return view;
     }
 
@@ -100,16 +114,16 @@ public class TasksListFragment extends Fragment {
                                 Date date;
                                 boolean isDone;
                                 try {
-                                    date = new Date(document.getTimestamp("task_date").getSeconds()*1000);
-                                }catch (Exception e){
-                                    Log.e(TAG,e.getMessage());
+                                    date = new Date(document.getTimestamp("task_date").getSeconds() * 1000);
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.getMessage());
                                     date = new Date();
                                 }
 
                                 try {
                                     isDone = document.getBoolean("done");
-                                }catch (Exception e){
-                                    Log.e(TAG,e.getMessage());
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.getMessage());
                                     isDone = false;
                                 }
 
@@ -117,10 +131,12 @@ public class TasksListFragment extends Fragment {
                                 OllertTask ollertTask = new OllertTask(document.getId(),
                                         document.getString("task_content"),
                                         date,
-                                        isDone );
+                                        isDone);
                                 ollertTasks.add(ollertTask);
                             }
-                            recyclerView.setAdapter(new TasksRecyclerViewAdapter(ollertTasks));
+                            ollertTasks.removeIf(predicate);
+                            adapter = new TasksRecyclerViewAdapter(ollertTasks,navigatorCallBack);
+                            recyclerView.setAdapter(adapter);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -131,7 +147,14 @@ public class TasksListFragment extends Fragment {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK);
+            navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK,null);
+        }
+    };
+
+    Predicate<OllertTask> predicate = new Predicate<OllertTask>() {
+        @Override
+        public boolean test(OllertTask task) {
+            return task.getDone() != isDoneSwitch.isChecked();
         }
     };
 }

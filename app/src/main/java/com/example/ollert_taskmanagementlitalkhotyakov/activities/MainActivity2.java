@@ -32,7 +32,7 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.TASK_LIST);
+        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.TASK_LIST,null);
 
 //        OllertTask ollertTask = new OllertTask("lital", "go home2", new Date());
 //        setTaskToFirestore(task);
@@ -63,7 +63,7 @@ public class MainActivity2 extends AppCompatActivity {
 
  private NavigatorCallBack navigatorCallBack = new NavigatorCallBack() {
      @Override
-     public void navigateTo(ScreenName screenName) {
+     public void navigateTo(ScreenName screenName, OllertTask task) {
          switch (screenName){
              case TASK_LIST:
                  getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
@@ -71,7 +71,7 @@ public class MainActivity2 extends AppCompatActivity {
                  break;
              case CREATE_TASK:
                  getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
-                         CreateTaskFragment.newInstance(navigatorCallBack)).commit();
+                         CreateTaskFragment.newInstance(navigatorCallBack,task)).commit();
                  break;
          }
      }

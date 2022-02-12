@@ -1,5 +1,7 @@
 package com.example.ollert_taskmanagementlitalkhotyakov.fragments.callBacks;
 
+import com.example.ollert_taskmanagementlitalkhotyakov.objects.OllertTask;
+
 public interface NavigatorCallBack {
 
     enum ScreenName {
@@ -8,7 +10,7 @@ public interface NavigatorCallBack {
 
     }
 
-    void navigateTo(ScreenName screenName);
+    void navigateTo(ScreenName screenName, OllertTask task);
 
 }
 
