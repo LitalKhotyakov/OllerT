@@ -14,4 +14,16 @@
     <string name="please_enter_your_phone_number_to_continue">Please enter your Phone Number to continue</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="is_task_done">is task done</string>
+    <string name="save_task">Save Task</string>
+    <string name="select_date">SELECT DATE</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
+    <string name="task_name">Task Name</string>
+    <string name="add_new_task">Add New Task</string>
+    <string name="_972xxxxxxxxx">+972XXXXXXXXX</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="username">UserName</string>
+    <string name="fullname">FullName</string>
 </resources>

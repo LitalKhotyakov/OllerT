@@ -23,8 +23,8 @@ import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    private  static final int LIMIT = 50;
-    private  static final String TAG = "MainActivity2";
+    private static final int LIMIT = 50;
+    private static final String TAG = "MainActivity2";
     public static final String COLLECTION_NAME = "tasks";
 
     @Override
@@ -32,12 +32,7 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.TASK_LIST,null);
-
-//        OllertTask ollertTask = new OllertTask("lital", "go home2", new Date());
-//        setTaskToFirestore(task);
-//        getAllTasksFirebase();
-
+        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.TASK_LIST, null);
 
     }
 
@@ -60,20 +55,19 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
-
- private NavigatorCallBack navigatorCallBack = new NavigatorCallBack() {
-     @Override
-     public void navigateTo(ScreenName screenName, OllertTask task) {
-         switch (screenName){
-             case TASK_LIST:
-                 getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
-                         TasksListFragment.newInstance(navigatorCallBack)).commit();
-                 break;
-             case CREATE_TASK:
-                 getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
-                         CreateTaskFragment.newInstance(navigatorCallBack,task)).commit();
-                 break;
-         }
-     }
- };
+    private NavigatorCallBack navigatorCallBack = new NavigatorCallBack() {
+        @Override
+        public void navigateTo(ScreenName screenName, OllertTask task) {
+            switch (screenName) {
+                case TASK_LIST:
+                    getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
+                            TasksListFragment.newInstance(navigatorCallBack)).commit();
+                    break;
+                case CREATE_TASK:
+                    getSupportFragmentManager().beginTransaction().add(R.id.panel_FRL_menu,
+                            CreateTaskFragment.newInstance(navigatorCallBack, task)).commit();
+                    break;
+            }
+        }
+    };
 }

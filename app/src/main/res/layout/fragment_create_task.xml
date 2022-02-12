@@ -11,7 +11,6 @@
     android:padding="10dp"
     tools:context=".activities.LoginActivity">
 
-    <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/log_IMG_add"
         android:layout_width="120dp"
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Add New Task"
+            android:text="@string/add_new_task"
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,11 +40,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/form_EDT_taskName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="Task Name"
+            android:hint="@string/task_name"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -58,11 +57,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/form_EDT_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Description"
+            android:hint="@string/description"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="Date"
+            android:hint="@string/date"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
 
-                android:text="SELECT DATE" />
+                android:text="@string/select_date" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,22 +111,22 @@
 
 
         <Switch
-            android:id="@+id/is_done_swich"
+            android:id="@+id/is_done_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="is task done"
+            android:text="@string/is_task_done"
             app:layout_constraintStart_toStartOf="@id/in_date"
-            app:layout_constraintTop_toBottomOf="@id/in_date" />
+            app:layout_constraintTop_toBottomOf="@id/in_date"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Save Task"
+            android:text="@string/save_task"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:cornerRadius="50dp"

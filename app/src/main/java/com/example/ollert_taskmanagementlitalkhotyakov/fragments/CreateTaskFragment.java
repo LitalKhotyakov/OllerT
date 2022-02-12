@@ -31,15 +31,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateTaskFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 
 public class CreateTaskFragment extends Fragment {
     private static final String TAG = "CreateTaskFragment";
-
 
 
     private NavigatorCallBack navigatorCallBack;
@@ -52,7 +46,6 @@ public class CreateTaskFragment extends Fragment {
     private TextInputLayout txtDate;
     private int mYear, mMonth, mDay;
     private Date taskDate = new Date();
-
 
 
     private CreateTaskFragment() {
@@ -81,19 +74,19 @@ public class CreateTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
-        nameEditText = view.findViewById(R.id.editTextTextPersonName3);
-        descriptionEditText = view.findViewById(R.id.editTextTextPersonName4);
-        aSwitch = view.findViewById(R.id.is_done_swich);
+        nameEditText = view.findViewById(R.id.form_EDT_taskName);
+        descriptionEditText = view.findViewById(R.id.form_EDT_description);
+        aSwitch = view.findViewById(R.id.is_done_switch);
         button = view.findViewById(R.id.button);
         btnDatePicker = view.findViewById(R.id.btn_date);
         txtDate = view.findViewById(R.id.in_date);
 
-        if (exsistingTask != null){
+        if (exsistingTask != null) {
             nameEditText.getEditText().setText(exsistingTask.getTask_name());
             nameEditText.getEditText().setFocusable(false);
             nameEditText.getEditText().setEnabled(false);
             descriptionEditText.getEditText().setText(exsistingTask.getTask_content());
-            txtDate.getEditText().setText(exsistingTask.getTask_date().getDay() + "-" + exsistingTask.getTask_date().getMonth() + "-" + exsistingTask.getTask_date().getYear() );
+            txtDate.getEditText().setText(exsistingTask.getTask_date().getDay() + "-" + exsistingTask.getTask_date().getMonth() + "-" + exsistingTask.getTask_date().getYear());
             aSwitch.setChecked(exsistingTask.getDone());
 
         }
@@ -118,7 +111,7 @@ public class CreateTaskFragment extends Fragment {
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
                                     txtDate.getEditText().setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                                    taskDate = new GregorianCalendar(year,monthOfYear - 1,dayOfMonth).getTime();
+                                    taskDate = new GregorianCalendar(year, monthOfYear - 1, dayOfMonth).getTime();
 
                                 }
                             }, mYear, mMonth, mDay);
@@ -150,7 +143,7 @@ public class CreateTaskFragment extends Fragment {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
-                        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.TASK_LIST,null);
+                        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.TASK_LIST, null);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

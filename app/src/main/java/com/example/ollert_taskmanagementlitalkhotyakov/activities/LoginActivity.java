@@ -23,7 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
 
 
-
     private boolean isOTP = false;
 
 
@@ -45,8 +44,8 @@ public class LoginActivity extends AppCompatActivity {
                 String Email = form_EDT_Email.getEditText().getText().toString();
                 String phoneNumber = form_EDT_phoneNumber.getEditText().getText().toString();
 
-                Intent intent = new Intent(getApplicationContext() , VerifyPhoneNumberActivity.class);
-                intent.putExtra("phoneNumber",phoneNumber);
+                Intent intent = new Intent(getApplicationContext(), VerifyPhoneNumberActivity.class);
+                intent.putExtra("phoneNumber", phoneNumber);
                 startActivity(intent);
 
                 DocumentReference documentReference = fStore.collection("users").document(phoneNumber);
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
-        if (isOTP){
+        if (isOTP) {
             Intent intent = new Intent(this, MainActivity2.class);
             startActivity(intent);
         }

@@ -46,15 +46,9 @@ public class TasksListFragment extends Fragment {
     private TasksRecyclerViewAdapter adapter;
 
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     private TasksListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static TasksListFragment newInstance(NavigatorCallBack navigatorCallBack) {
         TasksListFragment fragment = new TasksListFragment();
         Bundle args = new Bundle();
@@ -135,7 +129,7 @@ public class TasksListFragment extends Fragment {
                                 ollertTasks.add(ollertTask);
                             }
                             ollertTasks.removeIf(predicate);
-                            adapter = new TasksRecyclerViewAdapter(ollertTasks,navigatorCallBack);
+                            adapter = new TasksRecyclerViewAdapter(ollertTasks, navigatorCallBack);
                             recyclerView.setAdapter(adapter);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -147,7 +141,7 @@ public class TasksListFragment extends Fragment {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK,null);
+            navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK, null);
         }
     };
 

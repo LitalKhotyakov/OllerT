@@ -41,7 +41,7 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
         return ollertTasks.size();
     }
 
-    public void updateList(List<OllertTask> ollertTasks){
+    public void updateList(List<OllertTask> ollertTasks) {
         this.ollertTasks = ollertTasks;
         notifyDataSetChanged();
     }
@@ -57,17 +57,17 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
         }
 
         public void update(OllertTask myOllertTask) {
-            binding.taskName.setText(myOllertTask.getTask_name()+"");
-            binding.taskContent.setText(myOllertTask.getTask_content()+"");
-            binding.taskDate.setText(myOllertTask.getTask_date()+"");
-            if (!myOllertTask.getDone()){
+            binding.taskName.setText(myOllertTask.getTask_name() + "");
+            binding.taskContent.setText(myOllertTask.getTask_content() + "");
+            binding.taskDate.setText(myOllertTask.getTask_date() + "");
+            if (!myOllertTask.getDone()) {
                 binding.taskIsDone.setVisibility(View.INVISIBLE);
             }
             binding.itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (navigatorCallBack != null){
-                        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK,myOllertTask);
+                    if (navigatorCallBack != null) {
+                        navigatorCallBack.navigateTo(NavigatorCallBack.ScreenName.CREATE_TASK, myOllertTask);
                     }
                 }
             });

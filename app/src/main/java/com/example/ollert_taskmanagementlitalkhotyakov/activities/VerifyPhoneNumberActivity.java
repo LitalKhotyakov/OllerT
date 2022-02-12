@@ -1,6 +1,5 @@
 package com.example.ollert_taskmanagementlitalkhotyakov.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ollert_taskmanagementlitalkhotyakov.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
@@ -51,7 +49,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity {
         String phoneNumber = getIntent().getStringExtra("phoneNumber");
 
         firebaseAuth = FirebaseAuth.getInstance();
-        sendVverificationCodeToUser(phoneNumber);
+        sendVerificationCodeToUser(phoneNumber);
 
         form_BTN_verify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,15 +72,14 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity {
                 if (code.isEmpty()) {
                     Toast.makeText(VerifyPhoneNumberActivity.this, "please enter your phone number", Toast.LENGTH_SHORT).show();
                 } else {
-                    sendVverificationCodeToUser(phoneNumber);
+                    sendVerificationCodeToUser(phoneNumber);
                 }
             }
         });
     }
 
 
-    private void sendVverificationCodeToUser(String phoneNumber) {
-//        firebaseAuth.getFirebaseAuthSettings().setAppVerificationDisabledForTesting(true);
+    private void sendVerificationCodeToUser(String phoneNumber) {
 
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)
